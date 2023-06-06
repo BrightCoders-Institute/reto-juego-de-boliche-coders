@@ -13,10 +13,14 @@ class JuegoDeBoliche {
     }
   }
 
-  isSpare () {
-    this.throws.map(item => {
+  game () {
+    this.throws.map((item, i) => {
       if(item.firstThrowValue + item.secondThrowValue === 10) {
+        item.totalRound = firstThrowValue + throws[i+1].totalThrows;
+      }
 
+      if(item.firstThrowValue === 10){
+        item.totalRound = totalThrows + throws[i+1].totalThrows;
       }
     })
   }
