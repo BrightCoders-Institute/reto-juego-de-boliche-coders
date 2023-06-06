@@ -1,9 +1,5 @@
 class JuegoDeBoliche {
   constructor() {
-    this.strike = false;
-    this.spare = false;
-    this.turnos = 10;
-    this.pinos = 10;
     this.throws = [];
   }
 
@@ -13,37 +9,35 @@ class JuegoDeBoliche {
     }
   }
 
-  game() {
-    this.throws.map((item, i) => {
-      if (
-        item.firstThrowValue + item.secondThrowValue === 10 &&
-        item.secondThrowValue !== 0
-      ) {
-        //Spare
-        if (i < 9) {
-          item.totalRound =
-            item.totalThrows + this.throws[i + 1].firstThrowValue;
+  score() {
+    let totalScore = 0;
+
+    this.throws.forEach((item, index) => {
+      if (index < 9) {
+        if (item.totalRound === 10 && item.firstThrowValue === 10 && item.secondThrowValue === 0) {
+          if (this.throws[index + 1].totalRound === 10) {
+            totalScore += 20 + this.throws[index + 2].firstThrowValue;
+          } else {
+            totalScore += 10 + this.throws[index + 1].totalThrows;
+          }
+        } else if (item.totalThrows === 10){
+            totalScore += 10 + this.throws[index + 1].firstThrowValue;
         } else {
-          //4 //3 //3-0
-          item.thirdThrow = Math.floor(Math.random() * (10 - 0 - 0 + 1) - 0);
-          item.totalRound = item.totalThrows + item.thirdThrow;
+            totalScore += item.totalThrows;
         }
-      } else if (item.firstThrowValue === 10) {
-        //Strike
-        if (i < 9) {
-          item.totalRound = item.totalThrows + this.throws[i + 1].totalThrows;
         } else {
-          //10 //0 //0-10
-          item.thirdThrow = Math.floor(Math.random() * (10 - 0 - 0 + 1) - 0);
-          item.totalRound = item.totalThrows + item.thirdThrow;
-        }
-      } else {
-        if (i < 9) {
-          item.totalRound = item.totalThrows;
-        }
-      }
+          if (item.totalRound === 10 ) {
+            item.thirdThrow = Math.floor(Math.random() * (10 - 0 - 0 + 1) - 0);
+            totalScore += 10 + item.firstThrowValue + item.secondThrowValue + item.thirdThrow;
+          } else if (item.totalThrows === 10) {
+            item.thirdThrow = Math.floor(Math.random() * (10 - 0 - 0 + 1) - 0);
+            totalScore += 10 + item.thirdThrow;
+          } else {
+            totalScore += item.totalThrows;
+          }    }
     });
-  }
+    return totalScore;    
+}
 }
 
 class Throw {
@@ -66,11 +60,15 @@ class Throw {
 
 const game = new JuegoDeBoliche();
 game.fill();
-game.game();
+game.score();
 
-game.throws.map((t) => {
-  console.log(t);
+game.throws.forEach((t, index) => {
+  console.log(`Throw ${index + 1}`);
+  console.log (t);
 });
+
+const totalScore = game.score();
+console.log('Total Score:', totalScore);
 
 // for(let i = 0; i < 10; i++) {
 //   const exa = new Throw();
