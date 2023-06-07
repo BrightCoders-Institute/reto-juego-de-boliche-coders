@@ -1,4 +1,6 @@
-class JuegoDeBoliche {
+const Throw = require("./throw");
+
+module.exports = class JuegoDeBoliche {
   constructor() {
     this.throws = [];
   }
@@ -45,42 +47,4 @@ class JuegoDeBoliche {
     });
     return totalScore;
   }
-}
-
-class Throw {
-  constructor() {
-    this.firstThrowValue = this.firstThrow();
-    this.secondThrowValue = this.secondThrow();
-    this.thirdThrow = 0;
-    this.totalRound = 0;
-    this.totalThrows = this.firstThrowValue + this.secondThrowValue;
-  }
-
-  firstThrow() {
-    return Math.floor(Math.random() * (10 - 0 + 1) - 0);
-  }
-
-  secondThrow() {
-    return Math.floor(Math.random() * (10 - this.firstThrowValue - 0 + 1) - 0);
-  }
-}
-
-const game = new JuegoDeBoliche();
-game.fill();
-game.score();
-
-game.throws.forEach((t, index) => {
-  console.log(`Throw ${index + 1}`);
-  console.log(t);
-});
-
-const totalScore = game.score();
-console.log("Total Score:", totalScore);
-
-// for(let i = 0; i < 10; i++) {
-//   const exa = new Throw();
-//   if(i === 9) {
-//     exa.thirdThrow = Math.floor((Math.random() * (10 - 0 + 1) - 0))
-//   }
-//   console.log(exa);
-// }
+};
