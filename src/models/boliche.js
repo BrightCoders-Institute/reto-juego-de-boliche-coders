@@ -6,7 +6,7 @@ module.exports = class JuegoDeBoliche {
   }
 
   fill() {
-    for (let i = 0; i < 10; i ++) {
+    for (let i = 0; i < 10; i++) {
       this.throws.push(new Throw());
     }
   }
@@ -18,8 +18,8 @@ module.exports = class JuegoDeBoliche {
       if (index < 9) {
         if (
           // Strike
-          item.firstThrowValue === 10
-          && item.secondThrowValue === 0
+          item.firstThrowValue === 10 &&
+          item.secondThrowValue === 0
         ) {
           if (this.throws[index + 1].totalRound === 10) {
             totalScore += 20 + this.throws[index + 2].firstThrowValue;
@@ -34,7 +34,11 @@ module.exports = class JuegoDeBoliche {
       } else if (item.totalRound === 10) {
         item.thirdThrow();
         // item.thirdThrow = Math.floor(Math.random() * (10 - 0 - 0 + 1) - 0);
-        totalScore += 10 + item.firstThrowValue + item.secondThrowValue + item.thirdThrowValue;
+        totalScore +=
+          10 +
+          item.firstThrowValue +
+          item.secondThrowValue +
+          item.thirdThrowValue;
       } else if (item.totalThrows === 10) {
         item.thirdThrow();
         // item.thirdThrow = Math.floor(Math.random() * (10 - 0 - 0 + 1) - 0);

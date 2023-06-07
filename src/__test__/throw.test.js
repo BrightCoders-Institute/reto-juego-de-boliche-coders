@@ -1,4 +1,4 @@
-const Throw = require("../throw");
+const Throw = require("../models/throw");
 
 describe("Throw Class", () => {
   const throwInstance = new Throw();

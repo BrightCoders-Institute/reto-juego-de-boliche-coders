@@ -1,4 +1,4 @@
-const JuegoDeBoliche = require("./boliche");
+const JuegoDeBoliche = require("./src/models/boliche");
 
 const game = new JuegoDeBoliche();
 game.fill();
