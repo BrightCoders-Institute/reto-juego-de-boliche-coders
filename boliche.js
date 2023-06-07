@@ -6,7 +6,7 @@ module.exports = class JuegoDeBoliche {
   }
 
   fill() {
-    for (let i = 0; i < 10; i += i) {
+    for (let i = 0; i < 10; i ++) {
       this.throws.push(new Throw());
     }
   }
